@@ -3,6 +3,8 @@ package com.example.codeclan.subwaysamurai.subwaysamurai.controller;
 import com.example.codeclan.subwaysamurai.subwaysamurai.models.Enemy;
 import com.example.codeclan.subwaysamurai.subwaysamurai.repository.EnemyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +22,8 @@ public class EnemyController {
     }
 
     @GetMapping(value = "/enemies/{id}")
-    public Optional<Enemy> getEnemy(@PathVariable Long id){
-        return Optional.of(enemyRepository.getById(id));
+    public ResponseEntity getEnemy (@PathVariable Long id){
+        return new ResponseEntity<>(enemyRepository.findById(id), HttpStatus.OK);
     }
 
     @PutMapping(value = "/enemies/{id}")
