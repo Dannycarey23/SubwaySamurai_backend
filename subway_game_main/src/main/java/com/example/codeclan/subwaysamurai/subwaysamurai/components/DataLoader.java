@@ -14,8 +14,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-//@Profile("!test")
-//@Component
+@Profile("!test")
+@Component
 public class DataLoader implements ApplicationRunner {
 
     @Autowired
@@ -62,6 +62,12 @@ public class DataLoader implements ApplicationRunner {
 
         HealthItem healthItem4 = new HealthItem("Dram", 99);
         healthItemRepository.save(healthItem4);
+
+        player.addHealthItem(healthItem1);
+        player.addHealthItem(healthItem2);
+        player.addHealthItem(healthItem3);
+        player.addHealthItem(healthItem4);
+        playerRepository.save(player);
 
 
     }

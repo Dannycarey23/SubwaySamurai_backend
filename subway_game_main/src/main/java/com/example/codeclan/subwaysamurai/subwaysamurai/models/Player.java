@@ -1,6 +1,8 @@
 package com.example.codeclan.subwaysamurai.subwaysamurai.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Entity
@@ -15,6 +17,9 @@ public class Player {
     @Column(name = "attackPoints")
     private int attackPoints;
 
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HealthItem> inventory;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -24,6 +29,7 @@ public class Player {
         this.name = name;
         this.health = health;
         this.attackPoints = attackPoints;
+        this.inventory = new ArrayList<>();
     }
 
     public Player(){
@@ -66,4 +72,28 @@ public class Player {
     public void setAttackPoints(int attackPoints) {
         this.attackPoints = attackPoints;
     }
+
+    public List<HealthItem> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(List<HealthItem> inventory) {
+        this.inventory = inventory;
+    }
+
+    public void addHealthItem(HealthItem healthItem){
+        this.inventory.add(healthItem);
+        healthItem.setPlayer(this);
+    }
+
+    public void removeHealthItem(HealthItem healthItem){
+        if(healthItem.getPlayer() != this){
+            System.out.println("Not for you >:/");
+        } else {
+            inventory.remove(healthItem);
+            healthItem.setPlayer(null);
+        };
+    }
+
+
 }
