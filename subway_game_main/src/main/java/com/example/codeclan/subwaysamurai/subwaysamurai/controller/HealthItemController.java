@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,5 +33,12 @@ public class HealthItemController {
         currentHealthItem.setItemName(updatedHealthItem.getItemName());
         healthItemRepository.save(updatedHealthItem);
         return currentHealthItem;
+    }
+
+    @DeleteMapping(value = "/healthItems/{id}")
+    public ResponseEntity<HealthItem> deleteHealthItem (@PathVariable Long id){
+        Optional<HealthItem> healthItemToDelete = healthItemRepository.findById(id);
+        healthItemRepository.delete(healthItemToDelete.get());
+        return new ResponseEntity<>(healthItemToDelete.get(), HttpStatus.OK);
     }
 }
