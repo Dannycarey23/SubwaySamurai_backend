@@ -1,6 +1,7 @@
 package com.example.codeclan.subwaysamurai.subwaysamurai.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -18,9 +19,9 @@ public class HealthItem {
     @Column(name = "healthPoints")
     private int healthPoints;
 
-    @JsonBackReference
+    @JsonIgnoreProperties({"healthItems"})
     @ManyToOne
-    @JoinColumn(name = "players_id")
+    @JoinColumn(name = "players_id", nullable = false)
     private Player player;
 
     public HealthItem(String itemName, int healthPoints) {
