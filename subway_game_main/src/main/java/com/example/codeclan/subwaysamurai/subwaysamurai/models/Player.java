@@ -1,5 +1,7 @@
 package com.example.codeclan.subwaysamurai.subwaysamurai.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,8 @@ public class Player {
     @Column(name = "attackPoints")
     private int attackPoints;
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
     private List<HealthItem> inventory;
 
     @Id

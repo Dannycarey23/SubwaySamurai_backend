@@ -28,10 +28,13 @@ public class PlayerController {
     }
 
     @PutMapping(value = "/players/{id}")
-    public Player updatePlayer(@RequestBody Player updatedPlayer, @PathVariable Long id) {
-        Player currentPlayer = playerRepository.findById(id).get();
+    public Player updatePlayer(@RequestBody Player updatedPlayer, @PathVariable Long id){
+        Player currentPlayer = (Player) playerRepository.findById(id).get();
         currentPlayer.setName(updatedPlayer.getName());
         currentPlayer.setHealth(updatedPlayer.getHealth());
-        playerRepository.save(updatedPlayer);
-        return currentPlayer;}
+        currentPlayer.setInventory(updatedPlayer.getInventory());
+        currentPlayer.setAttackPoints(updatedPlayer.getAttackPoints());
+        playerRepository.save(currentPlayer);
+        return currentPlayer;
+    }
 }
