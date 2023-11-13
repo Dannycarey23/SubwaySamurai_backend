@@ -3,6 +3,8 @@ package com.example.codeclan.subwaysamurai.subwaysamurai.controller;
 import com.example.codeclan.subwaysamurai.subwaysamurai.models.Player;
 import com.example.codeclan.subwaysamurai.subwaysamurai.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +22,9 @@ public class PlayerController {
     }
 
     @GetMapping(value="/players/{id}")
-    public Optional<Player> getPlayer(@PathVariable Long id){
-        return playerRepository.findById(id);
+    public ResponseEntity getPlayer (@PathVariable Long id){
+        return new ResponseEntity<>(playerRepository.findById(id), HttpStatus.OK);
+
     }
 
     @PutMapping(value = "/players/{id}")

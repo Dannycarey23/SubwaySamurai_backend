@@ -1,6 +1,7 @@
 package com.example.codeclan.subwaysamurai.subwaysamurai;
 
 import com.example.codeclan.subwaysamurai.subwaysamurai.models.Enemy;
+import com.example.codeclan.subwaysamurai.subwaysamurai.models.HealthItem;
 import com.example.codeclan.subwaysamurai.subwaysamurai.models.Player;
 import com.example.codeclan.subwaysamurai.subwaysamurai.repository.EnemyRepository;
 import com.example.codeclan.subwaysamurai.subwaysamurai.repository.PlayerRepository;
@@ -35,13 +36,13 @@ public class SubwaysamuraiApplicationTests {
 
 	@Test
 	public void createPlayer(){
-		Player jen = new Player("Jen Jen", 100);
+		Player jen = new Player("Jen Jen", 100, 25);
 		playerRepository.save(jen);
 	}
 
 	@Test
 	public void playerCanAttack(){
-		Player player = new Player("Emma", 100);
+		Player player = new Player("Emma", 100, 25);
 		Enemy enemy = new Enemy("Lord Provost", 50, 10);
 		player.attack(enemy);
 		assertNotEquals(50, enemy.getHealth());
@@ -49,10 +50,18 @@ public class SubwaysamuraiApplicationTests {
 
 	@Test
 	public void enemyCanAttack(){
-		Player player = new Player("Emma", 100);
+		Player player = new Player("Emma", 100, 25);
 		Enemy enemy = new Enemy("Lord Provost", 50, 10);
 		enemy.attack(player);
 		assertNotEquals(100, player.getHealth());
+	}
+
+	@Test
+	public void canAddHealthItem(){
+		Player player = new Player("Emma", 100, 25);
+		HealthItem healthItem = new HealthItem("Tiger Balm", 10);
+		player.addHealthItem(healthItem);
+		assertNotEquals(0, player.getInventory().size());
 	}
 
 }
