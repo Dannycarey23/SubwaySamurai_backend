@@ -14,8 +14,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-//@Profile("!test")
-//@Component
+@Profile("!test")
+@Component
 public class DataLoader implements ApplicationRunner {
 
     @Autowired
@@ -36,7 +36,7 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args){
 
-        Player player = new Player("Unnamed Player", 100, 25);
+        Player player = new Player("", 100, 25);
         playerRepository.save(player);
 
         Enemy enemy1 = new Enemy("Kelvin Bridge Zombie", 50, 10);
@@ -51,23 +51,23 @@ public class DataLoader implements ApplicationRunner {
         Room room = new Room("help", "dungeon", "Jen");
         roomRepository.save(room);
 
-//        HealthItem healthItem1 = new HealthItem("Tiger Balm", 10);
-//        healthItemRepository.save(healthItem1);
-//
-//        HealthItem healthItem2 = new HealthItem("Painkillers", 20);
-//        healthItemRepository.save(healthItem2);
-//
-//        HealthItem healthItem3 = new HealthItem("Pint", 50);
-//        healthItemRepository.save(healthItem3);
-//
-//        HealthItem healthItem4 = new HealthItem("Dram", 99);
-//        healthItemRepository.save(healthItem4);
-//
-//        player.addHealthItem(healthItem1);
-//        player.addHealthItem(healthItem2);
-//        player.addHealthItem(healthItem3);
-//        player.addHealthItem(healthItem4);
-//        playerRepository.save(player);
+        HealthItem healthItem1 = new HealthItem("Tiger Balm", 10, player);
+        healthItemRepository.save(healthItem1);
+
+        HealthItem healthItem2 = new HealthItem("Painkillers", 20, player);
+        healthItemRepository.save(healthItem2);
+
+        HealthItem healthItem3 = new HealthItem("Pint", 50, player);
+        healthItemRepository.save(healthItem3);
+
+        HealthItem healthItem4 = new HealthItem("Dram", 99, player);
+        healthItemRepository.save(healthItem4);
+
+        player.addHealthItem(healthItem1);
+        player.addHealthItem(healthItem2);
+        player.addHealthItem(healthItem3);
+        player.addHealthItem(healthItem4);
+        playerRepository.save(player);
 
 
     }

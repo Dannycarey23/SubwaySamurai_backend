@@ -24,9 +24,10 @@ public class HealthItem {
     @JoinColumn(name = "players_id", nullable = false)
     private Player player;
 
-    public HealthItem(String itemName, int healthPoints) {
+    public HealthItem(String itemName, int healthPoints, Player player) {
         this.itemName = itemName;
         this.healthPoints = healthPoints;
+        this.player = player;
     }
 
     public HealthItem( ) {
