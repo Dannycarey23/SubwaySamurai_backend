@@ -31,9 +31,8 @@ public class PlayerController {
     public Player updatePlayer(@RequestBody Player updatedPlayer, @PathVariable Long id){
         Player currentPlayer = (Player) playerRepository.findById(id).get();
         currentPlayer.setName(updatedPlayer.getName());
-        currentPlayer.setHealth(updatedPlayer.getHealth());
-        currentPlayer.setInventory(updatedPlayer.getInventory());
-        currentPlayer.setAttackPoints(updatedPlayer.getAttackPoints());
+        currentPlayer.setHealth(100);
+        currentPlayer.setAttackPoints(25);
         playerRepository.save(currentPlayer);
         return currentPlayer;
     }
