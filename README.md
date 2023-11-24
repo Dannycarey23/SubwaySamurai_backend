@@ -12,4 +12,6 @@ If you're encountering issues due to the postgres username/password, try to remo
 
 - Java
 - Intellij
+- SpringBoot
+- Insomnia
 
